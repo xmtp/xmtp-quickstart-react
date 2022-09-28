@@ -1,0 +1,47 @@
+.home {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card {
+  width: 500px;
+  padding: 16px;
+  box-shadow: 10px 10px 10px grey;
+  border: 1px solid lightgrey;
+  border-radius: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-msg-btn {
+  border: 1px solid lightgrey;
+  background: transparent;
+  color: gray;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.identicon {
+  border: 2px solid darkgrey;
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  margin-right: 16px;
+}
+
+.conversation-header {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 16px;
+  border-bottom: 1px solid gray;
+  padding-bottom: 16px;
+}
