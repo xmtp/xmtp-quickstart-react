@@ -96,7 +96,7 @@ export const XmtpContextProvider = ({ children }) => {
   }, [providerState.client]);
 
   return (
-    <XmtpContext.Provider value={providerState}>
+    <XmtpContext.Provider value={[providerState, setProviderState]}>
       {children}
     </XmtpContext.Provider>
   );
