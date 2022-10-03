@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { XmtpContext } from "../contexts/XmtpContext";
 import useConversation from "../hooks/useConversation";
-import { shortAddress } from "../utils/utils";
+import { getLatestMessage, shortAddress } from "../utils/utils";
 import ConversationCard from "./ConversationCard";
 import Header from "./Header";
 import Input from "./Input";
@@ -17,8 +17,15 @@ const Home = () => {
   const [newAddress, setNewAddress] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
+  const reset = () => {
+    setSelectedConvo(null);
+    setIsNewMsg(false);
+    setErrorMsg("");
+    setMsgTxt("");
+  };
+
   const checkIfOnNetwork = async (address) => {
-    return await client?.canMessage(address) || false;
+    return (await client?.canMessage(address)) || false;
   };
 
   const onInputBlur = () => {
@@ -28,12 +35,9 @@ const Home = () => {
       setErrorMsg("Address not on XMTP network");
     } else {
       setSelectedConvo(newAddress);
-      setErrorMsg("")
+      setErrorMsg("");
     }
   };
-
-  const getLatestMessage = (messages) =>
-    messages?.length ? messages[messages.length - 1] : null;
 
   const orderByLatestMessage = (convoA, convoB) => {
     const convoAMessages = convoMessages.get(convoA.peerAddress) ?? [];
@@ -43,6 +47,11 @@ const Home = () => {
     const convoBLastMessageDate =
       getLatestMessage(convoBMessages)?.sent || new Date();
     return convoALastMessageDate < convoBLastMessageDate ? 1 : -1;
+  };
+
+  const sendNewMessage = () => {
+    sendMessage(msgTxt);
+    setMsgTxt("");
   };
 
   return (
@@ -78,15 +87,7 @@ const Home = () => {
         ) : (
           <>
             <div className="conversation-header">
-              <div
-                onClick={() => {
-                  setSelectedConvo(null);
-                  setIsNewMsg(false);
-                  setErrorMsg("")
-                  setMsgTxt("")
-                }}
-                className="back-chevron"
-              >
+              <div onClick={reset} className="back-chevron">
                 &#8249;
               </div>
               <div className="identicon"></div>
@@ -121,13 +122,7 @@ const Home = () => {
                 placeholder="Message"
                 value={msgTxt}
               />
-              <button
-                className="btn"
-                onClick={() => {
-                  sendMessage(msgTxt);
-                  setMsgTxt("");
-                }}
-              >
+              <button className="btn" onClick={sendNewMessage}>
                 Send message
               </button>
             </div>
