@@ -15,6 +15,7 @@ body {
   justify-content: space-between;
   padding: 12px 20px;
   width: -webkit-fill-available;
+  align-items: center;
 }
 
 .card {
@@ -111,4 +112,9 @@ body {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.logo {
+  width: 100px;
+  height: fit-content;
 }

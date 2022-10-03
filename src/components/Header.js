@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { WalletContext } from "../contexts/WalletContext";
 import { shortAddress } from "../utils/utils";
+import xmtpLogo from "../assets/xmtp-logo.png";
 
 const Header = () => {
   const { connectWallet, walletAddress } = useContext(WalletContext);
   return (
     <div className="header">
-      <h3>Logo</h3>
+      <img className="logo" alt="XMTP Logo" src={xmtpLogo} />
       {walletAddress ? (
         <h3>{shortAddress(walletAddress)}</h3>
       ) : (
