@@ -15,18 +15,20 @@ const Home = () => {
   const { sendMessage } = useConversation(selectedConvo);
   const [isNewMsg, setIsNewMsg] = useState(false);
   const [newAddress, setNewAddress] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const checkIfOnNetwork = async (address) => {
-    return client?.canMessage(address) || false;
+    return await client?.canMessage(address) || false;
   };
 
   const onInputBlur = () => {
-    if (!newAddress.startsWith("0x") || !newAddress.length === 42) {
-      alert("Invalid Address");
+    if (!newAddress.startsWith("0x") || newAddress.length !== 42) {
+      setErrorMsg("Invalid Address");
     } else if (!checkIfOnNetwork(newAddress)) {
-      alert("Address not on XMTP network");
+      setErrorMsg("Address not on XMTP network");
     } else {
       setSelectedConvo(newAddress);
+      setErrorMsg("")
     }
   };
 
@@ -80,20 +82,25 @@ const Home = () => {
                 onClick={() => {
                   setSelectedConvo(null);
                   setIsNewMsg(false);
+                  setErrorMsg("")
+                  setMsgTxt("")
                 }}
                 className="back-chevron"
               >
                 &#8249;
               </div>
               <div className="identicon"></div>
-              <div className="flex">
+              <div className="flex new-address-div">
                 {isNewMsg ? (
-                  <Input
-                    setNewValue={setNewAddress}
-                    placeholder="Wallet Address"
-                    value={newAddress}
-                    onInputBlur={onInputBlur}
-                  />
+                  <>
+                    <Input
+                      setNewValue={setNewAddress}
+                      placeholder="Wallet Address"
+                      value={newAddress}
+                      onInputBlur={onInputBlur}
+                    />
+                    {errorMsg && <span>{errorMsg}</span>}
+                  </>
                 ) : (
                   <b>{shortAddress(selectedConvo)}</b>
                 )}
