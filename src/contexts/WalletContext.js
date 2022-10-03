@@ -1,28 +1,24 @@
 import { createContext, useState } from "react";
 import Web3Modal from "web3modal";
-import { ethers } from 'ethers'
+import { ethers } from "ethers";
 
 export const WalletContext = createContext();
 
 export const WalletContextProvider = ({ children }) => {
   const [walletAddress, setWalletAddress] = useState(null);
-  const [signer, setSigner] = useState(null)
+  const [signer, setSigner] = useState(null);
 
   const connectWallet = async () => {
     let web3Provider = null;
     let instance = null;
     instance = await web3Modal.connect();
-    web3Provider = new ethers.providers.Web3Provider(instance, 'any')
-    const newSigner = await web3Provider.getSigner()
-    setSigner(newSigner)
+    web3Provider = new ethers.providers.Web3Provider(instance, "any");
+    const newSigner = await web3Provider.getSigner();
+    setSigner(newSigner);
     setWalletAddress(await newSigner.getAddress());
 
     instance.on("accountsChanged", () => {
-      connectWallet();
-    });
-
-    instance.on("chainChanged", () => {
-      connectWallet();
+      disconnectWallet();
     });
 
     instance.on("connect", () => {
@@ -34,7 +30,7 @@ export const WalletContextProvider = ({ children }) => {
     });
   };
 
-  const disconnectWallet = async () => {
+  const disconnectWallet = () => {
     setWalletAddress(null);
     setSigner(null);
   };
@@ -54,7 +50,7 @@ export const WalletContextProvider = ({ children }) => {
         connectWallet,
         disconnectWallet,
         walletAddress,
-        signer
+        signer,
       }}
     >
       {children}

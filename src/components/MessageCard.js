@@ -5,10 +5,14 @@ const MessageCard = ({ msg }) => {
   return (
     <>
       <div className="msg-header">
-        <div className="identicon"></div>
-        <div><b>{shortAddress(msg.senderAddress)}</b></div>
+        <div className="identicon" />
+        <div className="convo-info">
+          <div>
+            <b>{shortAddress(msg.senderAddress)}</b>
+          </div>
+          <div>{msg.content}</div>
+        </div>
       </div>
-      <div className="msg-container">{msg.content}</div>
     </>
   );
 };

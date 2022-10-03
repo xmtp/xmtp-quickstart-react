@@ -26,8 +26,21 @@ const Home = () => {
     } else if (!checkIfOnNetwork(newAddress)) {
       alert("Address not on XMTP network");
     } else {
-      setSelectedConvo(newAddress)
+      setSelectedConvo(newAddress);
     }
+  };
+
+  const getLatestMessage = (messages) =>
+    messages?.length ? messages[messages.length - 1] : null;
+
+  const orderByLatestMessage = (convoA, convoB) => {
+    const convoAMessages = convoMessages.get(convoA.peerAddress) ?? [];
+    const convoBMessages = convoMessages.get(convoB.peerAddress) ?? [];
+    const convoALastMessageDate =
+      getLatestMessage(convoAMessages)?.sent || new Date();
+    const convoBLastMessageDate =
+      getLatestMessage(convoBMessages)?.sent || new Date();
+    return convoALastMessageDate < convoBLastMessageDate ? 1 : -1;
   };
 
   return (
@@ -47,18 +60,21 @@ const Home = () => {
               </div>
             </div>
             <hr />
-            {Array.from(convoMessages.keys()).map((address) => {
-              return (
-                <ConversationCard
-                  key={"Convo_" + address}
-                  setSelectedConvo={setSelectedConvo}
-                  address={address}
-                />
-              );
-            })}
+            {Array.from(convoMessages.keys())
+              .sort(orderByLatestMessage)
+              .map((address) => {
+                return (
+                  <ConversationCard
+                    key={"Convo_" + address}
+                    setSelectedConvo={setSelectedConvo}
+                    address={address}
+                    latestMessage={getLatestMessage(convoMessages.get(address))}
+                  />
+                );
+              })}
           </>
         ) : (
-          <div>
+          <>
             <div className="conversation-header">
               <div
                 onClick={() => {
@@ -84,10 +100,12 @@ const Home = () => {
               </div>
             </div>
             <div className="msgs-container">
-              {!isNewMsg &&
-                convoMessages.get(selectedConvo).map((msg) => {
-                  return <MessageCard key={msg.id} msg={msg} />;
-                })}
+              <div className="mt-auto">
+                {!isNewMsg &&
+                  convoMessages.get(selectedConvo).map((msg) => {
+                    return <MessageCard key={msg.id} msg={msg} />;
+                  })}
+              </div>
             </div>
             <hr />
             <div className="flex">
@@ -106,7 +124,7 @@ const Home = () => {
                 Send message
               </button>
             </div>
-          </div>
+          </>
         )}
       </div>
     </div>

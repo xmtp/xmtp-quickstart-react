@@ -1,5 +1,5 @@
 body {
-  color: #252525
+  color: #252525;
 }
 
 .home {
@@ -10,7 +10,7 @@ body {
   flex-direction: column;
 }
 
-.header{
+.header {
   display: flex;
   justify-content: space-between;
   padding: 12px 20px;
@@ -54,7 +54,7 @@ body {
 .conversation-header {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   margin-bottom: 8px;
   border-bottom: 1px solid gray;
   padding-bottom: 8px;
@@ -64,14 +64,9 @@ body {
 .msg-header {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   margin-left: 32px;
-}
-
-.msg-container {
-  display: flex;
-  padding: 0px 84px 8px 84px;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
 
 .msgs-container {
@@ -80,7 +75,6 @@ body {
   display: flex;
   overflow: auto;
   flex-direction: column;
-  justify-content: end;
 }
 
 .back-chevron {
@@ -104,8 +98,17 @@ body {
   margin-right: 12px;
 }
 
-
 .flex {
   display: flex;
   flex: 1;
+}
+
+.convo-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mt-auto {
+  margin-top: auto;
 }
