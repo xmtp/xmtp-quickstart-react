@@ -2,34 +2,51 @@ body {
   color: #252525;
 }
 
+.flex {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */     /* NEW - Chrome */
+  display: flex; 
+}
+
 .home {
-  display: flex;
   width: 100%;
   height: 100vh;
-  align-items: center;
-  flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   padding: 12px 20px;
   width: -webkit-fill-available;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .card {
   width: 500px;
   padding: 16px;
-  box-shadow: 0px 0px 10px 10px #d4d4d4;
+  -webkit-box-shadow: 0px 0px 10px 10px #d4d4d4;
+          box-shadow: 0px 0px 10px 10px #d4d4d4;
   border: 1px solid lightgrey;
   border-radius: 16px;
 }
 
 .card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .btn {
@@ -38,6 +55,8 @@ body {
   color: gray;
   padding: 8px 20px;
   border-radius: 8px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   cursor: pointer;
   min-width: 140px;
@@ -53,9 +72,12 @@ body {
 }
 
 .conversation-header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   margin-bottom: 8px;
   border-bottom: 1px solid gray;
   padding-bottom: 8px;
@@ -63,9 +85,12 @@ body {
 }
 
 .msg-header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   margin-left: 32px;
   margin-bottom: 12px;
 }
@@ -73,17 +98,22 @@ body {
 .msgs-container {
   margin-top: 12px;
   height: 60vh;
-  display: flex;
   overflow: auto;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .back-chevron {
   font-size: 40px;
   margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   height: 40px;
   width: 20px;
   margin-right: 12px;
@@ -98,15 +128,14 @@ body {
   width: -webkit-fill-available;
 }
 
-.flex {
-  display: flex;
-  flex: 1;
-}
-
 .convo-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .mt-auto {
@@ -115,15 +144,23 @@ body {
 
 .logo {
   width: 100px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
 }
 
 .new-address-div {
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .new-address-div > span {
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   font-size: 12px;
   color: #ff5656;
   margin-top: 8px;

@@ -55,12 +55,12 @@ const Home = () => {
   };
 
   return (
-    <div className="home">
+    <div className="flex home">
       <Header />
       <div className="card">
         {!selectedConvo && !isNewMsg ? (
           <>
-            <div className="card-header">
+            <div className="card-header flex">
               <div>
                 <h4>Conversations</h4>
               </div>
@@ -86,8 +86,8 @@ const Home = () => {
           </>
         ) : (
           <>
-            <div className="conversation-header">
-              <div onClick={reset} className="back-chevron">
+            <div className="conversation-header flex">
+              <div onClick={reset} className="flex back-chevron">
                 &#8249;
               </div>
               <div className="identicon"></div>
@@ -107,7 +107,7 @@ const Home = () => {
                 )}
               </div>
             </div>
-            <div className="msgs-container">
+            <div className="msgs-container flex">
               <div className="mt-auto">
                 {!isNewMsg &&
                   convoMessages.get(selectedConvo).map((msg) => {

@@ -4,7 +4,7 @@ import { shortAddress } from "../utils/utils";
 const MessageCard = ({ msg }) => {
   return (
     <>
-      <div className="msg-header">
+      <div className="msg-header flex">
         <div className="identicon" />
         <div className="convo-info">
           <div>

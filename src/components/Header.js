@@ -6,7 +6,7 @@ import xmtpLogo from "../assets/xmtp-logo.png";
 const Header = () => {
   const { connectWallet, walletAddress } = useContext(WalletContext);
   return (
-    <div className="header">
+    <div className="header flex">
       <img className="logo" alt="XMTP Logo" src={xmtpLogo} />
       {walletAddress ? (
         <h3>{shortAddress(walletAddress)}</h3>
