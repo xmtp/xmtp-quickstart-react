@@ -5,10 +5,10 @@ const ConversationCard = ({ setSelectedConvo, address, latestMessage }) => {
   return (
     <div
       onClick={() => setSelectedConvo(address)}
-      className="conversation-header flex"
+      className="conversation-header flex justify-start"
     >
       <div className="identicon" />
-      <div className="flex convo-info">
+      <div className="flex convo-info align-start flex-dir-col justify-start">
         <div>
           <b>{shortAddress(address)}</b>
         </div>

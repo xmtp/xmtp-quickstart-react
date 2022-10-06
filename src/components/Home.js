@@ -55,12 +55,12 @@ const Home = () => {
   };
 
   return (
-    <div className="flex align-center home">
+    <div className="flex align-center flex-dir-col home">
       <Header />
       <div className="card">
         {!selectedConvo && !isNewMsg ? (
           <>
-            <div className="card-header flex align-center">
+            <div className="flex justify-between align-center">
               <div>
                 <h4>Conversations</h4>
               </div>
@@ -86,12 +86,12 @@ const Home = () => {
           </>
         ) : (
           <>
-            <div className="conversation-header flex">
-              <div onClick={reset} className="flex back-chevron align-center">
+            <div className="conversation-header align-center flex justify-start">
+              <div onClick={reset} className="flex back-chevron justify-center align-center">
                 &#8249;
               </div>
               <div className="identicon"></div>
-              <div className="flex new-address-div">
+              <div className={`flex flex-dir-col ${isNewMsg ? "flex-1" : ""}`}>
                 {isNewMsg ? (
                   <>
                     <Input
@@ -100,14 +100,14 @@ const Home = () => {
                       value={newAddress}
                       onInputBlur={onInputBlur}
                     />
-                    {errorMsg && <span>{errorMsg}</span>}
+                    {errorMsg && <span className="new-address flex-dir-col" >{errorMsg}</span>}
                   </>
                 ) : (
                   <b>{shortAddress(selectedConvo)}</b>
                 )}
               </div>
             </div>
-            <div className="msgs-container flex">
+            <div className="msgs-container flex flex-dir-col">
               <div className="mt-auto">
                 {!isNewMsg &&
                   convoMessages.get(selectedConvo).map((msg) => {

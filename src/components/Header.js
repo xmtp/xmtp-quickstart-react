@@ -7,9 +7,9 @@ import { XmtpContext } from "../contexts/XmtpContext";
 const Header = () => {
   const { connectWallet, walletAddress, signer } = useContext(WalletContext);
   const [providerState] = useContext(XmtpContext);
-  
+
   return (
-    <div className="header flex align-center">
+    <div className="header flex align-center justify-between">
       <img className="logo" alt="XMTP Logo" src={xmtpLogo} />
       {walletAddress ? (
         <div className="flex align-center">
