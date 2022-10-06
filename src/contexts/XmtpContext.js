@@ -42,7 +42,7 @@ export const XmtpContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    signer ? initClient(signer) : disconnect();
+    signer ? setProviderState({...providerState, initClient}) : disconnect();
   }, [signer]);
 
   useEffect(() => {

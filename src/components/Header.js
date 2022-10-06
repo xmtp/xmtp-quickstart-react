@@ -2,17 +2,26 @@ import React, { useContext } from "react";
 import { WalletContext } from "../contexts/WalletContext";
 import { shortAddress } from "../utils/utils";
 import xmtpLogo from "../assets/xmtp-logo.png";
+import { XmtpContext } from "../contexts/XmtpContext";
 
 const Header = () => {
-  const { connectWallet, walletAddress } = useContext(WalletContext);
+  const { connectWallet, walletAddress, signer } = useContext(WalletContext);
+  const [providerState] = useContext(XmtpContext);
+  
   return (
-    <div className="header flex">
+    <div className="header flex align-center">
       <img className="logo" alt="XMTP Logo" src={xmtpLogo} />
       {walletAddress ? (
+        <div className="flex align-center">
         <h3>{shortAddress(walletAddress)}</h3>
+        {!providerState.client && <button className="btn" onClick={()=>providerState.initClient(signer)}>
+        Connect to XMTP
+      </button>
+}
+      </div>
       ) : (
         <button className="btn" onClick={connectWallet}>
-          Connect
+          Connect Wallet
         </button>
       )}
     </div>

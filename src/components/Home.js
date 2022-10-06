@@ -55,12 +55,12 @@ const Home = () => {
   };
 
   return (
-    <div className="flex home">
+    <div className="flex align-center home">
       <Header />
       <div className="card">
         {!selectedConvo && !isNewMsg ? (
           <>
-            <div className="card-header flex">
+            <div className="card-header flex align-center">
               <div>
                 <h4>Conversations</h4>
               </div>
@@ -87,7 +87,7 @@ const Home = () => {
         ) : (
           <>
             <div className="conversation-header flex">
-              <div onClick={reset} className="flex back-chevron">
+              <div onClick={reset} className="flex back-chevron align-center">
                 &#8249;
               </div>
               <div className="identicon"></div>
