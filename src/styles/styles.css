@@ -67,14 +67,15 @@ body {
   border-radius: 50%;
   height: 32px;
   width: 32px;
+  min-height: 32px;
+  min-width: 32px;
+  max-height: 32px;
+  max-width: 32px;
   margin-right: 16px;
   background-color: #252525;
 }
 
 .conversation-header {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
@@ -85,9 +86,6 @@ body {
 }
 
 .msg-header {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
@@ -136,6 +134,10 @@ body {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+          -webkit-box-pack: start;
+              -ms-flex-pack: start;
+                  justify-content: flex-start;
+          text-align: left;
 }
 
 .mt-auto {
