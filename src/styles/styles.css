@@ -131,6 +131,7 @@ body {
   padding: 8px 20px;
   border-radius: 8px;
   width: -webkit-fill-available;
+  width: -moz-available;
 }
 
 .convo-info {
