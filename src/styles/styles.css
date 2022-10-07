@@ -4,8 +4,8 @@ body {
 
 .flex {
   display: -webkit-box;
-  display: -ms-flexbox;      
-  display: flex; 
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .align-center {
@@ -48,7 +48,7 @@ body {
 .flex-1 {
   -webkit-box-flex: 1;
   -ms-flex: 1;
-  flex: 1
+  flex: 1;
 }
 
 .home {
@@ -59,13 +59,14 @@ body {
 .header {
   padding: 12px 20px;
   width: -webkit-fill-available;
+  width: -moz-available;
 }
 
 .card {
   width: 500px;
   padding: 16px;
   -webkit-box-shadow: 0px 0px 10px 10px #d4d4d4;
-          box-shadow: 0px 0px 10px 10px #d4d4d4;
+  box-shadow: 0px 0px 10px 10px #d4d4d4;
   border: 1px solid lightgrey;
   border-radius: 16px;
 }
