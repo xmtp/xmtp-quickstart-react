@@ -69,9 +69,6 @@ export const XmtpContextProvider = ({ children }) => {
         })
       ).then(() => {
         setProviderState({ ...providerState, loadingConversations: false });
-        if (Notification.permission === "default") {
-          Notification.requestPermission();
-        }
       });
     };
 

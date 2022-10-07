@@ -2,13 +2,12 @@ import { useState, useEffect, useContext } from "react";
 import { WalletContext } from "../contexts/WalletContext";
 import { XmtpContext } from "../contexts/XmtpContext";
 
-let stream;
-
 const useConversation = (peerAddress, onMessageCallback) => {
   const { walletAddress } = useContext(WalletContext);
   const [providerState, setProviderState] = useContext(XmtpContext);
   const [conversation, setConversation] = useState(null);
   const { client, convoMessages } = providerState;
+  const [stream, setStream] = useState("");
 
   useEffect(() => {
     const getConvo = async () => {
@@ -23,8 +22,9 @@ const useConversation = (peerAddress, onMessageCallback) => {
   useEffect(() => {
     if (!conversation) return;
     const streamMessages = async () => {
-      stream = await conversation?.streamMessages();
-      for await (const msg of stream) {
+      const newStream = await conversation?.streamMessages();
+      setStream(newStream);
+      for await (const msg of newStream) {
         if (setProviderState) {
           const newMessages = convoMessages.get(conversation.peerAddress) ?? [];
           newMessages.push(msg);

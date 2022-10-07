@@ -9,10 +9,8 @@ export const WalletContextProvider = ({ children }) => {
   const [signer, setSigner] = useState(null);
 
   const connectWallet = async () => {
-    let web3Provider = null;
-    let instance = null;
-    instance = await web3Modal.connect();
-    web3Provider = new ethers.providers.Web3Provider(instance, "any");
+    const instance = await web3Modal.connect();
+    const web3Provider = new ethers.providers.Web3Provider(instance, "any");
     const newSigner = await web3Provider.getSigner();
     setSigner(newSigner);
     setWalletAddress(await newSigner.getAddress());
