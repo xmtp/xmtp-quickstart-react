@@ -66,7 +66,7 @@ const Home = () => {
               </div>
               <div>
                 <button onClick={() => setIsNewMsg(true)} className="btn">
-                  + New Message
+                  + New message
                 </button>
               </div>
             </div>
@@ -87,7 +87,10 @@ const Home = () => {
         ) : (
           <>
             <div className="conversation-header align-center flex justify-start">
-              <div onClick={reset} className="flex back-chevron justify-center align-center">
+              <div
+                onClick={reset}
+                className="flex back-chevron justify-center align-center"
+              >
                 &#8249;
               </div>
               <div className="identicon"></div>
@@ -100,7 +103,11 @@ const Home = () => {
                       value={newAddress}
                       onInputBlur={onInputBlur}
                     />
-                    {errorMsg && <span className="new-address flex-dir-col" >{errorMsg}</span>}
+                    {errorMsg && (
+                      <span className="new-address flex-dir-col">
+                        {errorMsg}
+                      </span>
+                    )}
                   </>
                 ) : (
                   <b>{shortAddress(selectedConvo)}</b>
@@ -119,11 +126,11 @@ const Home = () => {
             <div className="flex">
               <Input
                 setNewValue={setMsgTxt}
-                placeholder="Message"
+                placeholder="Write a message"
                 value={msgTxt}
               />
               <button className="btn" onClick={sendNewMessage}>
-                Send message
+                Send
               </button>
             </div>
           </>

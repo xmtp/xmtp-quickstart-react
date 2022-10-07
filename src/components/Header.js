@@ -13,15 +13,19 @@ const Header = () => {
       <img className="logo" alt="XMTP Logo" src={xmtpLogo} />
       {walletAddress ? (
         <div className="flex align-center">
-        <h3>{shortAddress(walletAddress)}</h3>
-        {!providerState.client && <button className="btn" onClick={()=>providerState.initClient(signer)}>
-        Connect to XMTP
-      </button>
-}
-      </div>
+          <h3>{shortAddress(walletAddress)}</h3>
+          {!providerState.client && (
+            <button
+              className="btn"
+              onClick={() => providerState.initClient(signer)}
+            >
+              Connect to XMTP
+            </button>
+          )}
+        </div>
       ) : (
         <button className="btn" onClick={connectWallet}>
-          Connect Wallet
+          Connect wallet
         </button>
       )}
     </div>

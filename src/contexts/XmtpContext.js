@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect, useContext } from "react";
-import { Client } from '@xmtp/xmtp-js'
+import { Client } from "@xmtp/xmtp-js";
 import { WalletContext } from "./WalletContext";
 
 export const XmtpContext = createContext();
@@ -42,7 +42,8 @@ export const XmtpContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    signer ? setProviderState({...providerState, initClient}) : disconnect();
+    signer ? setProviderState({ ...providerState, initClient }) : disconnect();
+    // eslint-disable-next-line
   }, [signer]);
 
   useEffect(() => {
@@ -93,6 +94,7 @@ export const XmtpContextProvider = ({ children }) => {
 
     listConversations();
     streamConversations();
+    // eslint-disable-next-line
   }, [providerState.client]);
 
   return (
