@@ -30,7 +30,7 @@ const Home = () => {
 
   const onInputBlur = () => {
     if (!newAddress.startsWith("0x") || newAddress.length !== 42) {
-      setErrorMsg("Invalid Address");
+      setErrorMsg("Invalid address");
     } else if (!checkIfOnNetwork(newAddress)) {
       setErrorMsg("Address not on XMTP network");
     } else {
@@ -99,7 +99,7 @@ const Home = () => {
                   <>
                     <Input
                       setNewValue={setNewAddress}
-                      placeholder="Wallet Address"
+                      placeholder="Enter a wallet address"
                       value={newAddress}
                       onInputBlur={onInputBlur}
                     />

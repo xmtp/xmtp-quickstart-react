@@ -52,6 +52,7 @@ const useConversation = (peerAddress, onMessageCallback) => {
       };
       closeStream();
     };
+    // eslint-disable-next-line
   }, [conversation, convoMessages, onMessageCallback, walletAddress]);
 
   const sendMessage = async (message) => {
