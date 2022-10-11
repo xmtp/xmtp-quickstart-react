@@ -2,26 +2,17 @@ import { useState, useEffect, useContext } from "react";
 import { WalletContext } from "../contexts/WalletContext";
 import { XmtpContext } from "../contexts/XmtpContext";
 
-const useConversation = (peerAddress, onMessageCallback) => {
+const useStreamMessages = (peerAddress, onMessageCallback) => {
   const { walletAddress } = useContext(WalletContext);
   const [providerState, setProviderState] = useContext(XmtpContext);
-  const [conversation, setConversation] = useState(null);
   const { client, convoMessages } = providerState;
   const [stream, setStream] = useState("");
 
   useEffect(() => {
-    const getConvo = async () => {
-      if (!client || !peerAddress) {
-        return;
-      }
-      setConversation(await client.conversations.newConversation(peerAddress));
-    };
-    getConvo();
-  }, [client, peerAddress]);
+    if (!peerAddress) return;
 
-  useEffect(() => {
-    if (!conversation) return;
     const streamMessages = async () => {
+      const conversation = await client.conversations.newConversation(peerAddress)
       const newStream = await conversation?.streamMessages();
       setStream(newStream);
       for await (const msg of newStream) {
@@ -45,6 +36,7 @@ const useConversation = (peerAddress, onMessageCallback) => {
       }
     };
     streamMessages();
+    
     return () => {
       const closeStream = async () => {
         if (!stream) return;
@@ -53,16 +45,8 @@ const useConversation = (peerAddress, onMessageCallback) => {
       closeStream();
     };
     // eslint-disable-next-line
-  }, [conversation, convoMessages, onMessageCallback, walletAddress]);
+  }, [convoMessages, onMessageCallback, walletAddress]);
 
-  const sendMessage = async (message) => {
-    if (!conversation) return;
-    await conversation.send(message);
-  };
-
-  return {
-    sendMessage,
-  };
 };
 
-export default useConversation;
+export default useStreamMessages;
