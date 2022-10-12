@@ -9,6 +9,7 @@ import AddressInput from "./AddressInput";
 import BackButton from "./BackButton";
 import MessageList from "./MessageList";
 import ConversationList from "./ConversationList";
+import useStreamConversations from "../hooks/useStreamConversations";
 
 const Home = () => {
   const [providerState] = useContext(XmtpContext);
@@ -17,6 +18,7 @@ const Home = () => {
   const [msgTxt, setMsgTxt] = useState("");
   const { sendMessage } = useSendMessage(selectedConvo);
   useStreamMessages(selectedConvo);
+  useStreamConversations()
   const [isNewMsg, setIsNewMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
