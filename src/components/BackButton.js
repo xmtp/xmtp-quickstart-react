@@ -4,7 +4,7 @@ const BackButton = ({ reset }) => {
   return (
     <div
       onClick={reset}
-      className="flex back-chevron justify-center align-center"
+      className="flex back-chevron justify-center"
     >
       &#8249;
     </div>
