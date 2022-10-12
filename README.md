@@ -56,7 +56,7 @@ The app is running locally and is configured to connect to the XMTP `dev` networ
 
 ![Shows the landing page of the XMTP Quickstart React App in an unconnected state, including a Connect wallet button, New message button, and an empty Conversations panel](src/assets/xmtp-quickstart-react-app.png)
 
-- To learn how to get started building with XMTP, see [Get started with building messaging between blockchain accounts using XMTP and React](#)
+<!--- To learn how to get started building with XMTP, see Get started with building messaging between blockchain accounts using XMTP and React-->
 
 - For a quickstart guide to building with XMTP, see the [XMTP JavaScript SDK README](https://github.com/xmtp/xmtp-js#readme)
 
