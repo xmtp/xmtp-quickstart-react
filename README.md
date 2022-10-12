@@ -1,6 +1,6 @@
 # Get started with the XMTP Quickstart React App
 
-XMTP (Extensible Message Transport Protocol) is an open protocol and network for secure and private web3 messaging. For example, you can build an app with XMTP to provide messaging between blockchain accounts, including 1:1 chat, alerts, announcements, and more.
+XMTP (Extensible Message Transport Protocol) is an open protocol and network for secure and private web3 messaging. For example, you can build an app with XMTP to provide messaging between blockchain accounts, including 1:1 chat, alerts, announcements, and more. To learn more, see [Introduction to XMTP](https://xmtp.org/docs/dev-concepts/introduction).
 
 The XMTP Quickstart React App is an example app that you can use as a developer tool to learn how to build with XMTP. The app is intentionally built with lightweight code to help make it easier to parse and start learning to build with XMTP. For example, the app:
 
@@ -56,11 +56,11 @@ The app is running locally and is configured to connect to the XMTP `dev` networ
 
 ![Shows the landing page of the XMTP Quickstart React App in an unconnected state, including a Connect wallet button, New message button, and an empty Conversations panel](src/assets/xmtp-quickstart-react-app.png)
 
-<!--- To learn how to get started building with XMTP, see Get started with building messaging between blockchain accounts using XMTP and React-->
+<!--- To learn how to get started building with XMTP, see Get started with building messaging between blockchain accounts using XMTP and React.-->
 
-- For a quickstart guide to building with XMTP, see the [XMTP JavaScript SDK README](https://github.com/xmtp/xmtp-js#readme)
+- For a quickstart guide to building with XMTP, see the [XMTP JavaScript SDK README](https://github.com/xmtp/xmtp-js#readme).
 
-- To explore an example XMTP chat app with more advanced features, see the [example-chat-react app repo](https://github.com/xmtp/example-chat-react) and the [hosted example-chat-react app](https://xmtp.chat/)
+- To explore an example XMTP chat app with more advanced features, see the [example-chat-react app repo](https://github.com/xmtp/example-chat-react) and the [hosted example-chat-react app](https://xmtp.chat/).
 
 Have questions or feedback?
 
@@ -74,7 +74,7 @@ Have questions or feedback?
 
 2. The MetaMask wallet app extension appears. Select the wallet address (account) you want to use to send messages from using XMTP Quickstart React App. Click **Next**.
 
-   Note that while the XMTP Quickstart React App intentionally supports MetaMask only, XMTP can be used with any Ethereum Virtual Machine-compatible wallet apps that support ECDSA signing on the secp256k1 elliptic curve. These include common wallet apps such as MetaMask, Coinbase Wallet, and Rainbow Wallet, as well as most wallet apps in the WalletConnect network.
+   Note that while the XMTP Quickstart React App intentionally supports MetaMask only, XMTP can be used with any Ethereum Virtual Machine-compatible wallet apps that support ECDSA signing on the secp256k1 elliptic curve. These include common wallet apps such as MetaMask, Coinbase Wallet, and Rainbow Wallet, as well as most wallet apps in the WalletConnect network. To learn more, see [Wallet apps and blockchains supported by XMTP](https://xmtp.org/docs/dev-concepts/wallets).
 
 3. Confirm that you agree to connect your wallet address to the XMTP Quickstart React App. Click **Connect**.
 
@@ -94,4 +94,4 @@ Have questions or feedback?
 
    To send a message to a wallet address it must have an XMTP identity like the one you created in step 5. If the wallet address does not have an XMTP identity, the **Invalid wallet** error appears.
 
-   Note that while the XMTP Quickstart React App intentionally supports full wallet addresses only, XMTP works with any web3 identities that apps built with XMTP can derive from Ethereum accounts, such as ENS names and Lens profiles.
+   Note that while the XMTP Quickstart React App intentionally supports full wallet addresses only, XMTP works with any web3 identities that apps built with XMTP can derive from Ethereum accounts, such as ENS names and Lens profiles. To learn more, see [Introduction to XMTP](https://xmtp.org/docs/dev-concepts/introduction).
