@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# Get started with the XMTP Quickstart React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+XMTP (Extensible Message Transport Protocol) is an open protocol and network for secure and private web3 messaging. For example, you can build an app with XMTP to provide messaging between blockchain accounts, including 1:1 chat, alerts, announcements, and more.
 
-## Available Scripts
+The XMTP Quickstart React App is an example app that you can use as a developer tool to learn how to build with XMTP. The app is intentionally built with lightweight code to help make it easier to parse and start learning to build with XMTP. For example, the app:
 
-In the project directory, you can run:
+* Provides 1:1 chat functionality
 
-### `npm start`
+* Supports MetaMask wallet app connections only
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* Supports full wallet addresses only
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The app is built in React and uses the following SDK and library:
 
-### `npm test`
+* The [XMTP JavaScript SDK](https://github.com/xmtp/xmtp-js) for communicating with the XMTP network
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* The [web3modal library](https://github.com/WalletConnect/web3modal) for enabling MetaMask to connect to the app
 
-### `npm run build`
+## Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To install and run the XMTP Quickstart React App, you must have the following prerequisites installed:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* [Node](https://nodejs.org/en/download/) (LTS version) and npm to install and run the app
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* [MetaMask](https://metamask.io/) browser extension to sign in to the app
 
-### `npm run eject`
+   * It's also helpful to have a basic understanding of [how the MetaMask wallet app works](https://docs.metamask.io/guide/)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* A code editor of your choice, if you want to explore and build upon the app code
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Clone the repo
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+For example, run:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+git clone git@github.com:xmtp/xmtp-quickstart-react.git
+```
 
-## Learn More
+## Install the app
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+In the root directory of `xmtp-quickstart-react`, run:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm install
+```
 
-### Code Splitting
+## Run the app
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm start
+```
 
-### Analyzing the Bundle Size
+The XMTP Quickstart React App opens at [http://localhost:3000/](http://localhost:3000/) in your default browser.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The app is running locally and is configured to connect to the XMTP `dev` network.
 
-### Making a Progressive Web App
+![Shows the landing page of the XMTP Quickstart React App in an unconnected state, including a Connect wallet button, New message button, and an empty Conversations panel](src/assets/xmtp-quickstart-react-app.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- To learn how to get started building with XMTP, see [Get started with building messaging between blockchain accounts using XMTP and React](#)
 
-### Advanced Configuration
+- For a quickstart guide to building with XMTP, see the [XMTP JavaScript SDK README](https://github.com/xmtp/xmtp-js#readme)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- To explore an example XMTP chat app with more advanced features, see the [example-chat-react app repo](https://github.com/xmtp/example-chat-react) and the [hosted example-chat-react app](https://xmtp.chat/)
 
-### Deployment
+Have questions or feedback?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+* [XMTP Discord chat](https://discord.gg/xmtp)
 
-### `npm run build` fails to minify
+* [XMTP Q&A GitHub discussion forum](https://github.com/orgs/xmtp/discussions)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Use the XMTP Quickstart React App
+
+1. Click **Connect wallet**.
+
+2. The MetaMask wallet app extension appears. Select the wallet address (account) you want to use to send messages from using XMTP Quickstart React App. Click **Next**.
+
+   Note that while the XMTP Quickstart React App intentionally supports MetaMask only, XMTP can be used with any Ethereum Virtual Machine-compatible wallet apps that support ECDSA signing on the secp256k1 elliptic curve. These include common wallet apps such as MetaMask, Coinbase Wallet, and Rainbow Wallet, as well as most wallet apps in the WalletConnect network.
+
+3. Confirm that you agree to connect your wallet address to the XMTP Quickstart React App. Click **Connect**.
+
+4. At this point, you have connected your wallet address to the XMTP Quickstart React App using your MetaMask wallet. Next, you need to connect the XMTP Quickstart React App to the XMTP network. Click **Connect to XMTP**.
+
+5. The MetaMask wallet app extension appears again. If this is your first time using an app built with XMTP, you are prompted to sign to create an XMTP identity. This is like creating a messaging account associated with your wallet address. Click **Sign**.
+
+6. You are then prompted to enable your XMTP identity. This is like entering a password to access your messaging account. Click **Sign**.
+
+   To learn more about these signatures, see [Sign to send and receive messages using apps built with XMTP](https://xmtp.org/docs/dev-concepts/signatures).
+
+7. You are now ready to send a message. Click **New message** to start a new conversation.
+
+8. Enter the full wallet address you want to send a message to. For example, you can message **_0x194c31cAe1418D5256E8c58e0d08Aee1046C6Ed0_** to say hello to the team working on advancing the development of XMTP.
+
+   ![Shows the new message panel in the XMTP Quickstart React App with a message "Testing 1, 2, 3 - hello!" composed to be send to the wallet address 0x194c31cAe1418D5256E8c58e0d08Aee1046C6Ed0](src/assets/testing-1-2-3.png)
+
+   To send a message to a wallet address it must have an XMTP identity like the one you created in step 5. If the wallet address does not have an XMTP identity, the **Invalid wallet** error appears.
+
+   Note that while the XMTP Quickstart React App intentionally supports full wallet addresses only, XMTP works with any web3 identities that apps built with XMTP can derive from Ethereum accounts, such as ENS names and Lens profiles.
