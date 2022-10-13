@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { WalletContext } from "../contexts/WalletContext";
 import { XmtpContext } from "../contexts/XmtpContext";
 
-const useStreamMessages = (peerAddress, onMessageCallback) => {
+const useStreamMessages = (peerAddress) => {
   const { walletAddress } = useContext(WalletContext);
   const [providerState, setProviderState] = useContext(XmtpContext);
   const { client, convoMessages } = providerState;
@@ -30,9 +30,6 @@ const useStreamMessages = (peerAddress, onMessageCallback) => {
             convoMessages: new Map(convoMessages),
           });
         }
-        if (onMessageCallback) {
-          onMessageCallback();
-        }
       }
     };
     streamMessages();
@@ -45,7 +42,7 @@ const useStreamMessages = (peerAddress, onMessageCallback) => {
       closeStream();
     };
     // eslint-disable-next-line
-  }, [convoMessages, onMessageCallback, walletAddress]);
+  }, [convoMessages, walletAddress]);
 
 };
 

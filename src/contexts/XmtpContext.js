@@ -72,25 +72,8 @@ export const XmtpContextProvider = ({ children }) => {
       });
     };
 
-    const streamConversations = async () => {
-      const { client, convoMessages, conversations } = providerState;
-      const stream = await client.conversations.stream();
-      for await (const convo of stream) {
-        if (convo.peerAddress !== walletAddress) {
-          const messages = await convo.messages();
-          convoMessages.set(convo.peerAddress, messages);
-          conversations.set(convo.peerAddress, convo);
-          setProviderState({
-            ...providerState,
-            convoMessages,
-            conversations,
-          });
-        }
-      }
-    };
 
     listConversations();
-    streamConversations();
     // eslint-disable-next-line
   }, [providerState.client]);
 

@@ -8,6 +8,10 @@ body {
   display: flex;
 }
 
+h3 {
+  margin: 8px 0px;
+}
+
 .align-center {
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -63,12 +67,33 @@ body {
 }
 
 .card {
-  width: 500px;
+  width: 40%;
   padding: 16px;
   -webkit-box-shadow: 0px 0px 10px 10px #d4d4d4;
   box-shadow: 0px 0px 10px 10px #d4d4d4;
   border: 1px solid lightgrey;
   border-radius: 16px;
+  margin: 0px 16px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .card {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    width: -webkit-fill-available;
+  }
+
+  .header-mobile {
+    flex-direction: column;
+  }
+
+  .header-mobile > button {
+    margin-left: 0px;
+  }
 }
 
 .btn {
@@ -81,7 +106,6 @@ body {
   height: -moz-fit-content;
   height: fit-content;
   cursor: pointer;
-  min-width: 140px;
   margin-left: 12px;
 }
 
@@ -103,6 +127,12 @@ body {
   border-bottom: 1px solid gray;
   padding-bottom: 8px;
   cursor: pointer;
+  margin-right: 16px;
+}
+
+.conversation-list {
+  max-height: 70vh;
+  overflow: auto;
 }
 
 .msg-header {
@@ -118,10 +148,10 @@ body {
 
 .back-chevron {
   font-size: 40px;
-  margin-bottom: 6px;
   height: 40px;
   width: 20px;
   margin-right: 12px;
+  align-items: flex-end;
 }
 
 .text-input {

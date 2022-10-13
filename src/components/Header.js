@@ -12,7 +12,7 @@ const Header = () => {
     <div className="header flex align-center justify-between">
       <img className="logo" alt="XMTP Logo" src={xmtpLogo} />
       {walletAddress ? (
-        <div className="flex align-center">
+        <div className="flex align-center header-mobile">
           <h3>{shortAddress(walletAddress)}</h3>
           {!providerState.client && (
             <button
@@ -25,7 +25,9 @@ const Header = () => {
         </div>
       ) : (
         <button className="btn" onClick={connectWallet}>
-          Connect wallet
+          {!window.ethereum || !window.ethereum.isMetaMask
+            ? "Install MetaMask"
+            : "Connect wallet"}
         </button>
       )}
     </div>
