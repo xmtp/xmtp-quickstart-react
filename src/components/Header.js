@@ -25,7 +25,9 @@ const Header = () => {
         </div>
       ) : (
         <button className="btn" onClick={connectWallet}>
-          Connect wallet
+          {!window.ethereum || !window.ethereum.isMetaMask
+            ? "Install MetaMask"
+            : "Connect wallet"}
         </button>
       )}
     </div>

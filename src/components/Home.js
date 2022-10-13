@@ -18,7 +18,7 @@ const Home = () => {
   const [msgTxt, setMsgTxt] = useState("");
   const { sendMessage } = useSendMessage(selectedConvo);
   useStreamMessages(selectedConvo);
-  useStreamConversations()
+  useStreamConversations();
   const [isNewMsg, setIsNewMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -52,41 +52,43 @@ const Home = () => {
   return (
     <div className="flex align-center flex-dir-col home">
       <Header />
-      <div className="card">
-        {!selectedConvo && !isNewMsg ? (
-          <>
-            <CardHeader setIsNewMsg={setIsNewMsg} />
-            <ConversationList
-              convoMessages={convoMessages}
-              setSelectedConvo={setSelectedConvo}
-            />
-          </>
-        ) : (
-          <>
-            <div className="conversation-header align-center flex justify-start">
-              <BackButton reset={reset} />
-              <div className="identicon"></div>
-              <AddressInput
+      {client && (
+        <div className="card">
+          {!selectedConvo && !isNewMsg ? (
+            <>
+              <CardHeader setIsNewMsg={setIsNewMsg} />
+              <ConversationList
+                convoMessages={convoMessages}
+                setSelectedConvo={setSelectedConvo}
+              />
+            </>
+          ) : (
+            <>
+              <div className="conversation-header align-center flex justify-start">
+                <BackButton reset={reset} />
+                <div className="identicon"></div>
+                <AddressInput
+                  isNewMsg={isNewMsg}
+                  onInputBlur={onInputBlur}
+                  errorMsg={errorMsg}
+                  selectedConvo={selectedConvo}
+                />
+              </div>
+              <MessageList
                 isNewMsg={isNewMsg}
-                onInputBlur={onInputBlur}
-                errorMsg={errorMsg}
+                convoMessages={convoMessages}
                 selectedConvo={selectedConvo}
               />
-            </div>
-            <MessageList
-              isNewMsg={isNewMsg}
-              convoMessages={convoMessages}
-              selectedConvo={selectedConvo}
-            />
-            <hr />
-            <MessageComposer
-              msgTxt={msgTxt}
-              setMsgTxt={setMsgTxt}
-              sendNewMessage={sendNewMessage}
-            />
-          </>
-        )}
-      </div>
+              <hr />
+              <MessageComposer
+                msgTxt={msgTxt}
+                setMsgTxt={setMsgTxt}
+                sendNewMessage={sendNewMessage}
+              />
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 };
