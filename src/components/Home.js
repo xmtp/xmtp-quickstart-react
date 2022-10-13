@@ -57,10 +57,12 @@ const Home = () => {
           {!selectedConvo && !isNewMsg ? (
             <>
               <CardHeader setIsNewMsg={setIsNewMsg} />
-              <ConversationList
-                convoMessages={convoMessages}
-                setSelectedConvo={setSelectedConvo}
-              />
+              <div className="conversation-list">
+                <ConversationList
+                  convoMessages={convoMessages}
+                  setSelectedConvo={setSelectedConvo}
+                />
+              </div>
             </>
           ) : (
             <>
