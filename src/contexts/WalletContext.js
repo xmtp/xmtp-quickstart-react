@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import Web3Modal, { providers } from "web3modal";
+import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 
 export const WalletContext = createContext();
@@ -34,7 +34,6 @@ export const WalletContextProvider = ({ children }) => {
   };
 
   const providerOptions = {};
-
 
   // Redirect User to Install MetaMask if not already installed
   if (!window.ethereum || !window.ethereum.isMetaMask) {

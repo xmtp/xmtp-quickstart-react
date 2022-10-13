@@ -8,6 +8,10 @@ body {
   display: flex;
 }
 
+h3 {
+  margin: 8px 0px;
+}
+
 .align-center {
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -85,10 +89,6 @@ body {
 
   .header-mobile {
     flex-direction: column;
-  }
-  
-  .header-mobile > h3 {
-    margin-bottom: 8px;
   }
 
   .header-mobile > button {
