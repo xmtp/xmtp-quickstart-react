@@ -42,7 +42,6 @@ export const WalletContextProvider = ({ children }) => {
       package: {},
       connector: async () => {
         window.open("https://metamask.io");
-        // throw new Error("MetaMask not installed");
       },
     };
   }
