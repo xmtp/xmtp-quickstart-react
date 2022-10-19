@@ -3,7 +3,6 @@ import { WalletContext } from "../contexts/WalletContext";
 import { XmtpContext } from "../contexts/XmtpContext";
 
 const useStreamMessages = (peerAddress) => {
-  console.log(peerAddress)
   const { walletAddress } = useContext(WalletContext);
   const [providerState, setProviderState] = useContext(XmtpContext);
   const { client, convoMessages } = providerState;

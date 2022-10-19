@@ -9,7 +9,7 @@ const useStreamConversations = () => {
   const [stream, setStream] = useState("");
 
   useEffect(() => {
-    if (!conversations) return;
+    if (!conversations || !client) return;
 
     const streamConversations = async () => {
       const newStream = await client.conversations.stream();
