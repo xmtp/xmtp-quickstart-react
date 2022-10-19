@@ -3,6 +3,7 @@ import { WalletContext } from "../contexts/WalletContext";
 import { XmtpContext } from "../contexts/XmtpContext";
 
 const useStreamMessages = (peerAddress) => {
+  console.log(peerAddress)
   const { walletAddress } = useContext(WalletContext);
   const [providerState, setProviderState] = useContext(XmtpContext);
   const { client, convoMessages } = providerState;
@@ -20,7 +21,7 @@ const useStreamMessages = (peerAddress) => {
   }, [client, peerAddress]);
 
   useEffect(() => {
-    if (!conversation) return;
+    if (!conversation || !peerAddress) return;
 
     const streamMessages = async () => {
       const newStream = await conversation?.streamMessages();

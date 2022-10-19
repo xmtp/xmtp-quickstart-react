@@ -78,7 +78,7 @@ const Home = () => {
               </div>
               <MessageList
                 isNewMsg={isNewMsg}
-                convoMessages={convoMessages}
+                convoMessages={convoMessages.get(selectedConvo)}
                 selectedConvo={selectedConvo}
               />
               <hr />
