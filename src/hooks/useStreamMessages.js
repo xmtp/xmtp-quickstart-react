@@ -23,7 +23,7 @@ const useStreamMessages = (peerAddress) => {
     if (!conversation) return;
 
     const streamMessages = async () => {
-      const newStream = await conversation?.streamMessages();
+      const newStream = await conversation.streamMessages();
       setStream(newStream);
       for await (const msg of newStream) {
         if (setProviderState) {
@@ -52,7 +52,7 @@ const useStreamMessages = (peerAddress) => {
       closeStream();
     };
     // eslint-disable-next-line
-  }, [convoMessages, walletAddress, peerAddress]);
+  }, [convoMessages, walletAddress, conversation]);
 };
 
 export default useStreamMessages;

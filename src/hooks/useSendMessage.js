@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { XmtpContext } from "../contexts/XmtpContext";
 
 const useSendMessage = (peerAddress) => {
-  const [providerState]     = useContext(XmtpContext);
+  const [providerState] = useContext(XmtpContext);
   const { client } = providerState || {};
 
   const sendMessage = async (message) => {

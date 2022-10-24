@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { XmtpContext } from "../contexts/XmtpContext";
 import useSendMessage from "../hooks/useSendMessage";
 import Header from "./Header";
-import useStreamMessages from "../hooks/useStreamMessages";
 import CardHeader from "./CardHeader";
 import MessageComposer from "./MessageComposer";
 import AddressInput from "./AddressInput";
@@ -17,7 +16,6 @@ const Home = () => {
   const [selectedConvo, setSelectedConvo] = useState(null);
   const [msgTxt, setMsgTxt] = useState("");
   const { sendMessage } = useSendMessage(selectedConvo);
-  useStreamMessages(selectedConvo);
   useStreamConversations();
   const [isNewMsg, setIsNewMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
