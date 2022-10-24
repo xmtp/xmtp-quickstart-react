@@ -52,7 +52,7 @@ const useStreamMessages = (peerAddress) => {
       closeStream();
     };
     // eslint-disable-next-line
-  }, [convoMessages, walletAddress]);
+  }, [convoMessages, walletAddress, peerAddress]);
 };
 
 export default useStreamMessages;
