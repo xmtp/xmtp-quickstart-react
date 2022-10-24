@@ -20,7 +20,7 @@ const useStreamMessages = (peerAddress) => {
   }, [client, peerAddress]);
 
   useEffect(() => {
-    if (!conversation || !peerAddress) return;
+    if (!conversation) return;
 
     const streamMessages = async () => {
       const newStream = await conversation?.streamMessages();
