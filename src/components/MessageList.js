@@ -1,7 +1,7 @@
 import React from "react";
 import MessageCard from "./MessageCard";
 
-const MessageList = ({isNewMsg, convoMessages, selectedConvo}) => {
+const MessageList = ({isNewMsg, convoMessages}) => {
   return (
     <div className="msgs-container flex flex-dir-col">
       <div className="mt-auto">
