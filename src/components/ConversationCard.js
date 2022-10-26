@@ -1,7 +1,12 @@
 import React from "react";
-import { shortAddress, truncate } from "../utils/utils";
+import { truncate } from "../utils/utils";
 
-const ConversationCard = ({ setSelectedConvo, address, latestMessage }) => {
+const ConversationCard = ({
+  setSelectedConvo,
+  address,
+  latestMessage,
+  handle,
+}) => {
   return (
     <div
       onClick={() => setSelectedConvo(address)}
@@ -10,7 +15,7 @@ const ConversationCard = ({ setSelectedConvo, address, latestMessage }) => {
       <div className="identicon" />
       <div className="flex convo-info align-start flex-dir-col justify-start">
         <div>
-          <b>{shortAddress(address)}</b>
+          <b>{handle}</b>
         </div>
         <div>{latestMessage && truncate(latestMessage.content, 75)}</div>
       </div>
