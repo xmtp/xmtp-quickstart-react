@@ -1,40 +1,31 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { WalletContext } from "../contexts/WalletContext";
 import { XmtpContext } from "../contexts/XmtpContext";
 
-const useStreamMessages = (peerAddress) => {
+const useStreamMessages = (conversation) => {
   const { walletAddress } = useContext(WalletContext);
   const [providerState, setProviderState] = useContext(XmtpContext);
-  const { client, convoMessages } = providerState;
-  const [stream, setStream] = useState("");
-  const [conversation, setConversation] = useState(null);
-
-  useEffect(() => {
-    const getConvo = async () => {
-      if (!client || !peerAddress) {
-        return;
-      }
-      setConversation(await client.conversations.newConversation(peerAddress));
-    };
-    getConvo();
-  }, [client, peerAddress]);
+  const { convoMessages } = providerState;
 
   useEffect(() => {
     if (!conversation) return;
-
+    let stream;
     const streamMessages = async () => {
-      const newStream = await conversation.streamMessages();
-      setStream(newStream);
-      for await (const msg of newStream) {
+      stream = await conversation.streamMessages();
+      for await (const msg of stream) {
         if (setProviderState) {
-          const newMessages = convoMessages.get(conversation.peerAddress) ?? [];
+          const newMessages =
+            convoMessages.get(conversation.context?.conversationId) ?? [];
           newMessages.push(msg);
           const uniqueMessages = [
             ...Array.from(
               new Map(newMessages.map((item) => [item["id"], item])).values()
             ),
           ];
-          convoMessages.set(conversation.peerAddress, uniqueMessages);
+          convoMessages.set(
+            conversation.context?.conversationId,
+            uniqueMessages
+          );
           setProviderState({
             ...providerState,
             convoMessages: new Map(convoMessages),

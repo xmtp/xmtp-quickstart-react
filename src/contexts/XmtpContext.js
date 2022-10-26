@@ -6,6 +6,13 @@ export const XmtpContext = createContext();
 
 export const XmtpContextProvider = ({ children }) => {
   const { signer, walletAddress } = useContext(WalletContext);
+  /**
+   * @typedef {Object} ProviderState — Provider State
+   * @property {Client} client -
+   */
+  /**
+   * @type {[ProviderState, Function]} State
+   */
   const [providerState, setProviderState] = useState({
     client: null,
     initClient: () => {},
@@ -53,13 +60,17 @@ export const XmtpContextProvider = ({ children }) => {
       console.log("Listing conversations");
       setProviderState({ ...providerState, loadingConversations: true });
       const { client, convoMessages, conversations } = providerState;
-      const convos = await client.conversations.list();
+      const convos = (await client.conversations.list()).filter(
+        (convo) =>
+          convo.context?.conversationId &&
+          convo.context.conversationId.startsWith("lens.dev/dm/")
+      );
       Promise.all(
         convos.map(async (convo) => {
           if (convo.peerAddress !== walletAddress) {
             const messages = await convo.messages();
-            convoMessages.set(convo.peerAddress, messages);
-            conversations.set(convo.peerAddress, convo);
+            convoMessages.set(convo.context.conversationId, messages);
+            conversations.set(convo.context.conversationId, convo);
             setProviderState({
               ...providerState,
               convoMessages,
@@ -71,7 +82,6 @@ export const XmtpContextProvider = ({ children }) => {
         setProviderState({ ...providerState, loadingConversations: false });
       });
     };
-
 
     listConversations();
     // eslint-disable-next-line
