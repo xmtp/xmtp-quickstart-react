@@ -18,14 +18,16 @@ const ConversationList = ({ convoMessages, setSelectedConvo }) => {
       {Array.from(convoMessages.keys())
         .sort(orderByLatestMessage)
         .map((address) => {
-          return (
-            <ConversationCard
-              key={"Convo_" + address}
-              setSelectedConvo={setSelectedConvo}
-              address={address}
-              latestMessage={getLatestMessage(convoMessages.get(address))}
-            />
-          );
+          if (convoMessages.get(address).length > 0) {
+            return (
+              <ConversationCard
+                key={"Convo_" + address}
+                setSelectedConvo={setSelectedConvo}
+                address={address}
+                latestMessage={getLatestMessage(convoMessages.get(address))}
+              />
+            );
+          } else return null;
         })}
     </>
   );
