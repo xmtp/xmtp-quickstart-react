@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import { shortAddress } from "../utils/utils";
 import Input from "./Input";
 
-const AddressInput = ({
-  isNewMsg,
-  onInputBlur,
-  errorMsg,
-  selectedConvo,
-}) => {
+const AddressInput = ({ isNewMsg, onInputBlur, errorMsg, convoKey }) => {
   const [newAddress, setNewAddress] = useState("");
   return (
     <div className={`flex flex-dir-col ${isNewMsg ? "flex-1" : ""}`}>
@@ -24,7 +19,7 @@ const AddressInput = ({
           )}
         </>
       ) : (
-        <b>{shortAddress(selectedConvo)}</b>
+        <b>{shortAddress(convoKey)}</b>
       )}
     </div>
   );

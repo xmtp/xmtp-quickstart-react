@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { WalletContext } from "../contexts/WalletContext";
 import { XmtpContext } from "../contexts/XmtpContext";
 
-const useStreamMessages = (peerAddress) => {
+const useStreamMessages = ({ peerAddress, conversationId }) => {
   const { walletAddress } = useContext(WalletContext);
   const [providerState, setProviderState] = useContext(XmtpContext);
   const { client, convoMessages } = providerState;
@@ -14,10 +14,21 @@ const useStreamMessages = (peerAddress) => {
       if (!client || !peerAddress) {
         return;
       }
-      setConversation(await client.conversations.newConversation(peerAddress));
+      if (conversationId) {
+        setConversation(
+          await client.conversations.newConversation(peerAddress, {
+            conversationId: conversationId,
+            metadata: {},
+          })
+        );
+      } else {
+        setConversation(
+          await client.conversations.newConversation(peerAddress)
+        );
+      }
     };
     getConvo();
-  }, [client, peerAddress]);
+  }, [client, peerAddress, conversationId]);
 
   useEffect(() => {
     if (!conversation) return;
@@ -27,14 +38,16 @@ const useStreamMessages = (peerAddress) => {
       setStream(newStream);
       for await (const msg of newStream) {
         if (setProviderState) {
-          const newMessages = convoMessages.get(conversation.peerAddress) ?? [];
+          const convoKey =
+            conversation?.context?.conversationId ?? conversation.peerAddress;
+          const newMessages = convoMessages.get(convoKey) ?? [];
           newMessages.push(msg);
           const uniqueMessages = [
             ...Array.from(
               new Map(newMessages.map((item) => [item["id"], item])).values()
             ),
           ];
-          convoMessages.set(conversation.peerAddress, uniqueMessages);
+          convoMessages.set(convoKey, uniqueMessages);
           setProviderState({
             ...providerState,
             convoMessages: new Map(convoMessages),
