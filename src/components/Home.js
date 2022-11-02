@@ -38,6 +38,7 @@ const Home = () => {
       setErrorMsg("Address not on XMTP network");
     } else {
       setSelectedConvo(newAddress);
+      setIsNewMsg(false);
       setErrorMsg("");
     }
   };
