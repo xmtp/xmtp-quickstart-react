@@ -57,7 +57,9 @@ export const XmtpContextProvider = ({ children }) => {
       console.log("Listing conversations");
       setProviderState({ ...providerState, loadingConversations: true });
       const { client, convoMessages, conversations } = providerState;
-      const convos = await client.conversations.list();
+      const convos = (await client.conversations.list()).filter(
+        (conversation) => !conversation.context?.conversationId
+      );
       Promise.all(
         convos.map(async (convo) => {
           if (convo.peerAddress !== walletAddress) {
