@@ -3,32 +3,30 @@ import { getLatestMessage } from "../utils/utils";
 import ConversationCard from "./ConversationCard";
 
 const ConversationList = ({ convoMessages, setSelectedConvo }) => {
-  const orderByLatestMessage = (convoA, convoB) => {
-    const convoAMessages = convoMessages.get(convoA.peerAddress) ?? [];
-    const convoBMessages = convoMessages.get(convoB.peerAddress) ?? [];
-    const convoALastMessageDate =
-      getLatestMessage(convoAMessages)?.sent || new Date();
-    const convoBLastMessageDate =
-      getLatestMessage(convoBMessages)?.sent || new Date();
-    return convoALastMessageDate < convoBLastMessageDate ? 1 : -1;
-  };
+  
+  const sortedConvos = new Map(
+    [...convoMessages.entries()].sort((convoA, convoB) => {
+      return getLatestMessage(convoA[1])?.sent <
+        getLatestMessage(convoB[1])?.sent
+        ? 1
+        : -1;
+    })
+  );
 
   return (
     <>
-      {Array.from(convoMessages.keys())
-        .sort(orderByLatestMessage)
-        .map((address) => {
-          if (convoMessages.get(address).length > 0) {
-            return (
-              <ConversationCard
-                key={"Convo_" + address}
-                setSelectedConvo={setSelectedConvo}
-                address={address}
-                latestMessage={getLatestMessage(convoMessages.get(address))}
-              />
-            );
-          } else return null;
-        })}
+      {Array.from(sortedConvos.keys()).map((address) => {
+        if (sortedConvos.get(address).length > 0) {
+          return (
+            <ConversationCard
+              key={"Convo_" + address}
+              setSelectedConvo={setSelectedConvo}
+              address={address}
+              latestMessage={getLatestMessage(sortedConvos.get(address))}
+            />
+          );
+        } else return null;
+      })}
     </>
   );
 };

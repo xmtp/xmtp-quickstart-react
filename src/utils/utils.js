@@ -14,4 +14,4 @@ export const truncate = (str, length) => {
 };
 
 export const getLatestMessage = (messages) =>
-messages?.length ? messages[messages.length - 1] : null;
+  messages?.length ? messages[messages.length - 1] : null;
