@@ -17,7 +17,11 @@ export const XmtpContextProvider = ({ children }) => {
   const initClient = async (wallet) => {
     if (wallet && !providerState.client) {
       try {
-        const client = await Client.create(wallet, { env: "dev" });
+        const keys = await Client.getKeys(signer, { env: "dev" });
+        const client = await Client.create(null, {
+          env: "dev",
+          privateKeyOverride: keys,
+        });
         setProviderState({
           ...providerState,
           client,
@@ -71,7 +75,6 @@ export const XmtpContextProvider = ({ children }) => {
         setProviderState({ ...providerState, loadingConversations: false });
       });
     };
-
 
     listConversations();
     // eslint-disable-next-line
