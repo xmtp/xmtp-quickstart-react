@@ -38,6 +38,7 @@ const Home = () => {
       setErrorMsg("Address not on XMTP network");
     } else {
       setSelectedConvo({ peerAddress: newAddress });
+      setIsNewMsg(false);
       setErrorMsg("");
     }
   };
@@ -79,7 +80,7 @@ const Home = () => {
               <MessageList
                 isNewMsg={isNewMsg}
                 convoKey={convoKey}
-                convoMessages={convoMessages.get(convoKey)}
+                convoMessages={convoMessages.get(convoKey) ?? []}
                 selectedConvo={selectedConvo}
               />
               <hr />
