@@ -17,8 +17,9 @@ const useStreamConversations = () => {
       for await (const convo of newStream) {
         if (convo.peerAddress !== walletAddress) {
           const messages = await convo.messages();
-          convoMessages.set(convo.peerAddress, messages);
-          conversations.set(convo.peerAddress, convo);
+          const convoKey = convo?.context?.conversationId ?? convo.peerAddress;
+          convoMessages.set(convoKey, messages);
+          conversations.set(convoKey, convo);
           setProviderState({
             ...providerState,
             convoMessages,

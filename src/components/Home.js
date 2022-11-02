@@ -13,7 +13,7 @@ import useStreamConversations from "../hooks/useStreamConversations";
 const Home = () => {
   const [providerState] = useContext(XmtpContext);
   const { convoMessages, client } = providerState;
-  const [selectedConvo, setSelectedConvo] = useState(null);
+  const [selectedConvo, setSelectedConvo] = useState({});
   const [msgTxt, setMsgTxt] = useState("");
   const { sendMessage } = useSendMessage(selectedConvo);
   useStreamConversations();
@@ -21,7 +21,7 @@ const Home = () => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const reset = () => {
-    setSelectedConvo(null);
+    setSelectedConvo({});
     setIsNewMsg(false);
     setErrorMsg("");
     setMsgTxt("");
@@ -37,7 +37,8 @@ const Home = () => {
     } else if (!checkIfOnNetwork(newAddress)) {
       setErrorMsg("Address not on XMTP network");
     } else {
-      setSelectedConvo(newAddress);
+      setSelectedConvo({ peerAddress: newAddress });
+      setIsNewMsg(false);
       setErrorMsg("");
     }
   };
@@ -47,12 +48,14 @@ const Home = () => {
     setMsgTxt("");
   };
 
+  const convoKey = selectedConvo?.conversationId ?? selectedConvo?.peerAddress;
+
   return (
     <div className="flex align-center flex-dir-col home">
       <Header />
       {client && (
         <div className="card">
-          {!selectedConvo && !isNewMsg ? (
+          {!selectedConvo?.peerAddress && !isNewMsg ? (
             <>
               <CardHeader setIsNewMsg={setIsNewMsg} />
               <div className="conversation-list">
@@ -71,12 +74,13 @@ const Home = () => {
                   isNewMsg={isNewMsg}
                   onInputBlur={onInputBlur}
                   errorMsg={errorMsg}
-                  selectedConvo={selectedConvo}
+                  convoKey={convoKey}
                 />
               </div>
               <MessageList
                 isNewMsg={isNewMsg}
-                convoMessages={convoMessages.get(selectedConvo)}
+                convoKey={convoKey}
+                convoMessages={convoMessages.get(convoKey) ?? []}
                 selectedConvo={selectedConvo}
               />
               <hr />

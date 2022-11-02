@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { XmtpContext } from "../contexts/XmtpContext";
 
-const useSendMessage = (peerAddress) => {
+const useSendMessage = ({peerAddress, conversationId}) => {
   const [providerState] = useContext(XmtpContext);
   const { client } = providerState || {};
 
@@ -9,9 +9,15 @@ const useSendMessage = (peerAddress) => {
     if (!client || !peerAddress) {
       return;
     }
-    const conversation = await client.conversations.newConversation(
-      peerAddress
-    );
+    let conversation;
+    if (conversationId) {
+      conversation = await client.conversations.newConversation(peerAddress, {
+        conversationId: conversationId,
+        metadata: {},
+      });
+    } else {
+      conversation = await client.conversations.newConversation(peerAddress);
+    }
     if (!conversation) return;
     await conversation.send(message);
   };

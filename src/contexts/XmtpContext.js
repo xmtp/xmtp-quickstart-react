@@ -17,7 +17,11 @@ export const XmtpContextProvider = ({ children }) => {
   const initClient = async (wallet) => {
     if (wallet && !providerState.client) {
       try {
-        const client = await Client.create(wallet, { env: "dev" });
+        const keys = await Client.getKeys(signer, { env: "dev" });
+        const client = await Client.create(null, {
+          env: "dev",
+          privateKeyOverride: keys,
+        });
         setProviderState({
           ...providerState,
           client,
@@ -50,7 +54,6 @@ export const XmtpContextProvider = ({ children }) => {
     if (!providerState.client) return;
 
     const listConversations = async () => {
-      console.log("Listing conversations");
       setProviderState({ ...providerState, loadingConversations: true });
       const { client, convoMessages, conversations } = providerState;
       const convos = await client.conversations.list();
@@ -58,8 +61,10 @@ export const XmtpContextProvider = ({ children }) => {
         convos.map(async (convo) => {
           if (convo.peerAddress !== walletAddress) {
             const messages = await convo.messages();
-            convoMessages.set(convo.peerAddress, messages);
-            conversations.set(convo.peerAddress, convo);
+            const convoKey =
+              convo?.context?.conversationId ?? convo.peerAddress;
+            convoMessages.set(convoKey, messages);
+            conversations.set(convoKey, convo);
             setProviderState({
               ...providerState,
               convoMessages,
@@ -71,7 +76,6 @@ export const XmtpContextProvider = ({ children }) => {
         setProviderState({ ...providerState, loadingConversations: false });
       });
     };
-
 
     listConversations();
     // eslint-disable-next-line
