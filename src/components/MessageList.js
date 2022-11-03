@@ -8,7 +8,7 @@ const MessageList = ({ isNewMsg, convoMessages, selectedConvo }) => {
   return (
     <div className="msgs-container flex flex-dir-col">
       <div className="mt-auto">
-        {!isNewMsg &&
+        {!isNewMsg && convoMessages &&
           convoMessages.map((msg) => {
             return <MessageCard key={msg.id} msg={msg} />;
           })}
