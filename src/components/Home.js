@@ -31,15 +31,17 @@ const Home = () => {
     return (await client?.canMessage(address)) || false;
   };
 
-  const onInputBlur = (newAddress) => {
+  const onInputBlur = async (newAddress) => {
     if (!newAddress.startsWith("0x") || newAddress.length !== 42) {
       setErrorMsg("Invalid address");
-    } else if (!checkIfOnNetwork(newAddress)) {
-      setErrorMsg("Address not on XMTP network");
     } else {
-      setSelectedConvo(newAddress);
-      setIsNewMsg(false);
-      setErrorMsg("");
+      const isOnNetwork = await checkIfOnNetwork(newAddress)
+      if (!isOnNetwork) {
+        setErrorMsg("Address not on XMTP network");
+      } else {
+        setSelectedConvo(newAddress);
+        setErrorMsg("");
+      }
     }
   };
 
@@ -77,7 +79,7 @@ const Home = () => {
               </div>
               <MessageList
                 isNewMsg={isNewMsg}
-                convoMessages={convoMessages.get(selectedConvo)}
+                convoMessages={convoMessages.get(selectedConvo) ?? []}
                 selectedConvo={selectedConvo}
               />
               <hr />
