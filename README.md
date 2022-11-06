@@ -29,7 +29,7 @@ To install and run the XMTP Quickstart React App, you must have the following pr
 For example, run:
 
 ```bash
-git clone git@github.com:xmtp/xmtp-quickstart-react.git
+git clone https://github.com/xmtp/xmtp-quickstart-react.git
 ```
 
 ## Install the app
