@@ -1,9 +1,10 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { WalletContextProvider } from "./contexts/WalletContext";
 import { XmtpContextProvider } from "./contexts/XmtpContext";
 import Home from "./components/Home";
 import { Buffer } from "buffer";
-import "./styles/styles.css"
+import "./styles/styles.css";
 import "./App.css";
 
 window.Buffer = Buffer;

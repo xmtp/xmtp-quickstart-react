@@ -1,10 +1,18 @@
 import React from "react";
 import { shortAddress, truncate } from "../utils/utils";
 
-const ConversationCard = ({ setSelectedConvo, address, latestMessage }) => {
+const ConversationCard = ({
+  setSelectedConvo,
+  address,
+  latestMessage,
+  reset,
+}) => {
   return (
     <div
-      onClick={() => setSelectedConvo(address)}
+      onClick={() => {
+        reset();
+        setSelectedConvo(address);
+      }}
       className="conversation-header flex justify-start"
     >
       <div className="identicon" />

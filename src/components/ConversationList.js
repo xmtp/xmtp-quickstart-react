@@ -2,7 +2,7 @@ import React from "react";
 import { getLatestMessage } from "../utils/utils";
 import ConversationCard from "./ConversationCard";
 
-const ConversationList = ({ convoMessages, setSelectedConvo }) => {
+const ConversationList = ({ convoMessages, setSelectedConvo, reset }) => {
   const orderByLatestMessage = (convoA, convoB) => {
     const convoAMessages = convoMessages.get(convoA.peerAddress) ?? [];
     const convoBMessages = convoMessages.get(convoB.peerAddress) ?? [];
@@ -22,6 +22,7 @@ const ConversationList = ({ convoMessages, setSelectedConvo }) => {
             <ConversationCard
               key={"Convo_" + address}
               setSelectedConvo={setSelectedConvo}
+              reset={reset}
               address={address}
               latestMessage={getLatestMessage(convoMessages.get(address))}
             />

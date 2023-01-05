@@ -6,7 +6,6 @@ import useStreamMessages from "../hooks/useStreamMessages";
 import CardHeader from "./CardHeader";
 import MessageComposer from "./MessageComposer";
 import AddressInput from "./AddressInput";
-import BackButton from "./BackButton";
 import MessageList from "./MessageList";
 import ConversationList from "./ConversationList";
 import useStreamConversations from "../hooks/useStreamConversations";
@@ -23,7 +22,6 @@ const Home = () => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const reset = () => {
-    setSelectedConvo(null);
     setIsNewMsg(false);
     setErrorMsg("");
     setMsgTxt("");
@@ -54,20 +52,20 @@ const Home = () => {
       <Header />
       {client && (
         <div className="card">
-          {!selectedConvo && !isNewMsg ? (
-            <>
-              <CardHeader setIsNewMsg={setIsNewMsg} />
-              <div className="conversation-list">
-                <ConversationList
-                  convoMessages={convoMessages}
-                  setSelectedConvo={setSelectedConvo}
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="conversation-header align-center flex justify-start">
-                <BackButton reset={reset} />
+          <div className="convo-list">
+            <CardHeader setIsNewMsg={setIsNewMsg} />
+            <div className="conversation-list">
+              <ConversationList
+                convoMessages={convoMessages}
+                setSelectedConvo={setSelectedConvo}
+                reset={reset}
+              />
+            </div>
+          </div>
+          {!selectedConvo && !isNewMsg ? null : (
+            <div className="msg-card">
+              <div className="conversation-header convo-header align-center flex justify-start ">
+                {/* <BackButton reset={reset} /> */}
                 <div className="identicon"></div>
                 <AddressInput
                   isNewMsg={isNewMsg}
@@ -81,13 +79,12 @@ const Home = () => {
                 convoMessages={convoMessages}
                 selectedConvo={selectedConvo}
               />
-              <hr />
               <MessageComposer
                 msgTxt={msgTxt}
                 setMsgTxt={setMsgTxt}
                 sendNewMessage={sendNewMessage}
               />
-            </>
+            </div>
           )}
         </div>
       )}

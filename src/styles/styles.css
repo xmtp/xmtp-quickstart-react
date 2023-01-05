@@ -67,26 +67,16 @@ h3 {
 }
 
 .card {
-  width: 40%;
-  padding: 16px;
-  -webkit-box-shadow: 0px 0px 10px 10px #d4d4d4;
-  box-shadow: 0px 0px 10px 10px #d4d4d4;
-  border: 1px solid lightgrey;
-  border-radius: 16px;
-  margin: 0px 16px;
+  display: flex;
+  width: 100%;
 }
 
-@media only screen and (max-width: 1200px) {
-  .card {
-    width: 50%;
-  }
+.convo-list {
+  border-right: 1px solid lightgrey;
+  padding-left: 20px;
 }
 
 @media only screen and (max-width: 600px) {
-  .card {
-    width: -webkit-fill-available;
-  }
-
   .header-mobile {
     flex-direction: column;
   }
@@ -106,7 +96,7 @@ h3 {
   height: -moz-fit-content;
   height: fit-content;
   cursor: pointer;
-  margin-left: 12px;
+  margin: 0px 12px;
 }
 
 .identicon {
@@ -124,15 +114,15 @@ h3 {
 
 .conversation-header {
   margin-bottom: 8px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid lightgrey;
   padding-bottom: 8px;
   cursor: pointer;
-  margin-right: 16px;
 }
 
 .conversation-list {
-  max-height: 70vh;
+  max-height: 82vh;
   overflow: auto;
+  min-width: 300px;
 }
 
 .msg-header {
@@ -142,7 +132,7 @@ h3 {
 
 .msgs-container {
   margin-top: 12px;
-  height: 60vh;
+  height: 75vh;
   overflow: auto;
 }
 
@@ -168,6 +158,15 @@ h3 {
   text-align: left;
 }
 
+.convo-header {
+  margin: 20px;
+  margin-top: 32px;
+}
+
+.convo-header > .identicon {
+  margin-left: 12px;
+}
+
 .mt-auto {
   margin-top: auto;
 }
@@ -182,4 +181,14 @@ h3 {
   margin-top: 8px;
   text-align: start;
   margin-left: 4px;
+}
+
+.msg-composer {
+  margin-left: 20px;
+  margin-top: 12px;
+}
+
+.msg-card {
+  width: -webkit-fill-available;
+  padding-right: 20px;
 }

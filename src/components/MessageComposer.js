@@ -3,7 +3,7 @@ import Input from "./Input";
 
 const MessageComposer = ({ msgTxt, setMsgTxt, sendNewMessage }) => {
   return (
-    <div className="flex">
+    <div className="flex msg-composer">
       <Input
         setNewValue={setMsgTxt}
         placeholder="Write a message"
