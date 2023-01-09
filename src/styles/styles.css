@@ -74,6 +74,7 @@ h3 {
 .convo-list {
   border-right: 1px solid lightgrey;
   padding-left: 20px;
+  height: 90vh;
 }
 
 @media only screen and (max-width: 600px) {
@@ -120,13 +121,14 @@ h3 {
 }
 
 .conversation-list {
-  max-height: 82vh;
+  max-height: 90%;
   overflow: auto;
-  min-width: 300px;
+  width: 300px;
+  max-width: 30vw;
 }
 
 .msg-header {
-  margin-left: 32px;
+  margin-left: 28px;
   margin-bottom: 12px;
 }
 
@@ -134,6 +136,7 @@ h3 {
   margin-top: 12px;
   height: 75vh;
   overflow: auto;
+  max-width: 68vw;
 }
 
 .back-chevron {
@@ -159,8 +162,7 @@ h3 {
 }
 
 .convo-header {
-  margin: 20px;
-  margin-top: 32px;
+  margin: 16px;
 }
 
 .convo-header > .identicon {
@@ -184,11 +186,17 @@ h3 {
 }
 
 .msg-composer {
-  margin-left: 20px;
+  margin-left: 16px;
   margin-top: 12px;
 }
 
 .msg-card {
   width: -webkit-fill-available;
-  padding-right: 20px;
+  padding-right: 16px;
+  max-width: -webkit-fill-available;
+}
+
+.msg-text {
+  max-width: 65%;
+  overflow-wrap: break-word;
 }
