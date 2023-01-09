@@ -135,8 +135,9 @@ h3 {
 .msgs-container {
   margin-top: 12px;
   height: 75vh;
-  overflow: auto;
-  max-width: 68vw;
+  overflow-y: auto;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .back-chevron {
@@ -197,6 +198,6 @@ h3 {
 }
 
 .msg-text {
-  max-width: 65%;
+  max-width: 75%;
   overflow-wrap: break-word;
 }
