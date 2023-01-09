@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { XmtpContext } from "../contexts/XmtpContext";
 import useSendMessage from "../hooks/useSendMessage";
 import Header from "./Header";
+import BackButton from "./BackButton";
 import useStreamMessages from "../hooks/useStreamMessages";
 import CardHeader from "./CardHeader";
 import MessageComposer from "./MessageComposer";
@@ -20,8 +21,10 @@ const Home = () => {
   useStreamConversations();
   const [isNewMsg, setIsNewMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
 
   const reset = () => {
+    setSelectedConvo(null);
     setIsNewMsg(false);
     setErrorMsg("");
     setMsgTxt("");
@@ -47,26 +50,58 @@ const Home = () => {
     setMsgTxt("");
   };
 
+  useEffect(() => {
+    // Handler to call on window resize
+    const handleResize = () => {
+      // Set window width/height to state
+      if (window.innerWidth <= 600) {
+        setIsMobile(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div className="flex align-center flex-dir-col home">
+    <div className='flex align-center flex-dir-col home'>
       <Header />
       {client && (
-        <div className="card">
-          <div className="convo-list">
-            <CardHeader setIsNewMsg={setIsNewMsg} />
-            <div className="conversation-list">
-              <ConversationList
-                convoMessages={convoMessages}
-                setSelectedConvo={setSelectedConvo}
-                reset={reset}
-              />
+        <div className='card'>
+          {!isMobile ? (
+            <div className='convo-list'>
+              <CardHeader setIsNewMsg={setIsNewMsg} />
+              <div className='conversation-list'>
+                <ConversationList
+                  convoMessages={convoMessages}
+                  setSelectedConvo={setSelectedConvo}
+                  reset={reset}
+                />
+              </div>
             </div>
-          </div>
-          {!selectedConvo && !isNewMsg ? null : (
-            <div className="msg-card">
-              <div className="conversation-header convo-header align-center flex justify-start ">
-                {/* <BackButton reset={reset} /> */}
-                <div className="identicon"></div>
+          ) : !selectedConvo ? (
+            <div className='convo-list'>
+              <CardHeader setIsNewMsg={setIsNewMsg} />
+              <div className='conversation-list'>
+                <ConversationList
+                  convoMessages={convoMessages}
+                  setSelectedConvo={setSelectedConvo}
+                  reset={reset}
+                />
+              </div>
+            </div>
+          ) : null}
+          {isMobile && !selectedConvo ? null : !selectedConvo &&
+            !isNewMsg ? null : (
+            <div className='msg-card'>
+              <div className='conversation-header convo-header align-center flex justify-start '>
+                <div className='back-btn'>
+                  <BackButton reset={reset} />
+                </div>
+                <div className='identicon'></div>
                 <AddressInput
                   isNewMsg={isNewMsg}
                   onInputBlur={onInputBlur}
