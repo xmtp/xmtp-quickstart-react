@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { XmtpContext } from "../contexts/XmtpContext";
 import useSendMessage from "../hooks/useSendMessage";
 import Header from "./Header";
-import BackButton from "./BackButton";
 import CardHeader from "./CardHeader";
 import MessageComposer from "./MessageComposer";
-import AddressInput from "./AddressInput";
 import MessageList from "./MessageList";
 import ConversationList from "./ConversationList";
 import useStreamConversations from "../hooks/useStreamConversations";
+import useWindowSize from "../hooks/useWindowSize";
+import AddressBar from "./AddressBar";
 
 const Home = () => {
   const [providerState] = useContext(XmtpContext);
@@ -17,9 +17,9 @@ const Home = () => {
   const [msgTxt, setMsgTxt] = useState("");
   const { sendMessage } = useSendMessage(selectedConvo);
   useStreamConversations();
-  const [isNewMsg, setIsNewMsg] = useState(false);
+  const [isNewMsg, setIsNewMsg] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useWindowSize();
 
   const reset = () => {
     setSelectedConvo(null);
@@ -28,87 +28,41 @@ const Home = () => {
     setMsgTxt("");
   };
 
-  const checkIfOnNetwork = async (address) => {
-    return (await client?.canMessage(address)) || false;
-  };
-
-  const onInputBlur = (newAddress) => {
-    if (!newAddress.startsWith("0x") || newAddress.length !== 42) {
-      setErrorMsg("Invalid address");
-    } else if (!checkIfOnNetwork(newAddress)) {
-      setErrorMsg("Address not on XMTP network");
-    } else {
-      setSelectedConvo(newAddress);
-      setErrorMsg("");
-    }
-  };
-
   const sendNewMessage = () => {
     sendMessage(msgTxt);
     setMsgTxt("");
   };
 
-  useEffect(() => {
-    // Handler to call on window resize
-    const handleResize = () => {
-      // Set window width/height to state
-      if (window.innerWidth <= 800) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    // Call handler right away so state gets updated with initial window size
-    handleResize();
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const ConvoList = () => (
+    <div className='convo-list'>
+      <CardHeader setIsNewMsg={setIsNewMsg} />
+      <div className='conversation-list'>
+        <ConversationList
+          convoMessages={convoMessages}
+          setSelectedConvo={setSelectedConvo}
+          reset={reset}
+        />
+      </div>
+    </div>
+  );
 
   return (
     <div className='flex align-center flex-dir-col home'>
       <Header />
       {client && (
         <div className='card'>
-          {!isMobile ? (
-            <div className='convo-list'>
-              <CardHeader setIsNewMsg={setIsNewMsg} />
-              <div className='conversation-list'>
-                <ConversationList
-                  convoMessages={convoMessages}
-                  setSelectedConvo={setSelectedConvo}
-                  reset={reset}
-                />
-              </div>
-            </div>
-          ) : !selectedConvo ? (
-            <div className='convo-list'>
-              <CardHeader setIsNewMsg={setIsNewMsg} />
-              <div className='conversation-list'>
-                <ConversationList
-                  convoMessages={convoMessages}
-                  setSelectedConvo={setSelectedConvo}
-                  reset={reset}
-                />
-              </div>
-            </div>
-          ) : null}
+          {!isMobile ? <ConvoList /> : !selectedConvo ? <ConvoList /> : null}
           {isMobile && !selectedConvo ? null : !selectedConvo &&
             !isNewMsg ? null : (
             <div className='msg-card'>
-              <div className='conversation-header convo-header align-center flex justify-start '>
-                <div className='back-btn'>
-                  <BackButton reset={reset} />
-                </div>
-                <div className='identicon'></div>
-                <AddressInput
-                  isNewMsg={isNewMsg}
-                  onInputBlur={onInputBlur}
-                  errorMsg={errorMsg}
-                  selectedConvo={selectedConvo}
-                />
-              </div>
+              <AddressBar
+                reset={reset}
+                isNewMsg={isNewMsg}
+                setErrorMsg={setErrorMsg}
+                errorMsg={errorMsg}
+                selectedConvo={selectedConvo}
+                setSelectedConvo={setSelectedConvo}
+              />
               <MessageList
                 isNewMsg={isNewMsg}
                 convoMessages={convoMessages.get(selectedConvo)}
