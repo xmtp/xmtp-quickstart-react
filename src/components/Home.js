@@ -3,7 +3,6 @@ import { XmtpContext } from "../contexts/XmtpContext";
 import useSendMessage from "../hooks/useSendMessage";
 import Header from "./Header";
 import BackButton from "./BackButton";
-import useStreamMessages from "../hooks/useStreamMessages";
 import CardHeader from "./CardHeader";
 import MessageComposer from "./MessageComposer";
 import AddressInput from "./AddressInput";
@@ -17,7 +16,6 @@ const Home = () => {
   const [selectedConvo, setSelectedConvo] = useState(null);
   const [msgTxt, setMsgTxt] = useState("");
   const { sendMessage } = useSendMessage(selectedConvo);
-  useStreamMessages(selectedConvo);
   useStreamConversations();
   const [isNewMsg, setIsNewMsg] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -111,7 +109,7 @@ const Home = () => {
               </div>
               <MessageList
                 isNewMsg={isNewMsg}
-                convoMessages={convoMessages}
+                convoMessages={convoMessages.get(selectedConvo)}
                 selectedConvo={selectedConvo}
               />
               <MessageComposer
