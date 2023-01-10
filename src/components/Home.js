@@ -52,8 +52,10 @@ const Home = () => {
     // Handler to call on window resize
     const handleResize = () => {
       // Set window width/height to state
-      if (window.innerWidth <= 600) {
+      if (window.innerWidth <= 800) {
         setIsMobile(true);
+      } else {
+        setIsMobile(false);
       }
     };
 
