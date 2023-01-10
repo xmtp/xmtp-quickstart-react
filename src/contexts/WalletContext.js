@@ -44,13 +44,13 @@ export const WalletContextProvider = ({ children }) => {
       connector: async () => {
         window.open("https://metamask.io");
         // throw new Error("MetaMask not installed");
-      },
+      }
     };
   }
 
   const web3Modal = new Web3Modal({
     cacheProvider: true, // optional
-    providerOptions, // required
+    providerOptions // required
   });
 
   return (
@@ -59,7 +59,7 @@ export const WalletContextProvider = ({ children }) => {
         connectWallet,
         disconnectWallet,
         walletAddress,
-        signer,
+        signer
       }}
     >
       {children}

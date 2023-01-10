@@ -7,13 +7,23 @@ const useStreamMessages = (peerAddress) => {
   const [providerState, setProviderState] = useContext(XmtpContext);
   const { client, convoMessages } = providerState;
   const [stream, setStream] = useState("");
+  const [conversation, setConversation] = useState(null);
 
   useEffect(() => {
-    if (!peerAddress) return;
+    const getConvo = async () => {
+      if (!client || !peerAddress) {
+        return;
+      }
+      setConversation(await client.conversations.newConversation(peerAddress));
+    };
+    getConvo();
+  }, [client, peerAddress]);
+
+  useEffect(() => {
+    if (!conversation) return;
 
     const streamMessages = async () => {
-      const conversation = await client.conversations.newConversation(peerAddress)
-      const newStream = await conversation?.streamMessages();
+      const newStream = await conversation.streamMessages();
       setStream(newStream);
       for await (const msg of newStream) {
         if (setProviderState) {
@@ -33,7 +43,7 @@ const useStreamMessages = (peerAddress) => {
       }
     };
     streamMessages();
-    
+
     return () => {
       const closeStream = async () => {
         if (!stream) return;
@@ -42,8 +52,7 @@ const useStreamMessages = (peerAddress) => {
       closeStream();
     };
     // eslint-disable-next-line
-  }, [convoMessages, walletAddress]);
-
+  }, [convoMessages, walletAddress, conversation]);
 };
 
 export default useStreamMessages;
