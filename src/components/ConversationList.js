@@ -2,8 +2,7 @@ import React from "react";
 import { getLatestMessage } from "../utils/utils";
 import ConversationCard from "./ConversationCard";
 
-const ConversationList = ({ convoMessages, setSelectedConvo }) => {
-  
+const ConversationList = ({ convoMessages, setSelectedConvo, reset }) => {
   const sortedConvos = new Map(
     [...convoMessages.entries()].sort((convoA, convoB) => {
       return getLatestMessage(convoA[1])?.sent <
@@ -21,6 +20,7 @@ const ConversationList = ({ convoMessages, setSelectedConvo }) => {
             <ConversationCard
               key={"Convo_" + address}
               setSelectedConvo={setSelectedConvo}
+              reset={reset}
               address={address}
               latestMessage={getLatestMessage(sortedConvos.get(address))}
             />

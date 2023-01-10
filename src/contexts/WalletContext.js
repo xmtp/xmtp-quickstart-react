@@ -1,3 +1,4 @@
+import React from "react";
 import { createContext, useState } from "react";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
@@ -42,13 +43,14 @@ export const WalletContextProvider = ({ children }) => {
       package: {},
       connector: async () => {
         window.open("https://metamask.io");
-      },
+        // throw new Error("MetaMask not installed");
+      }
     };
   }
 
   const web3Modal = new Web3Modal({
     cacheProvider: true, // optional
-    providerOptions, // required
+    providerOptions // required
   });
 
   return (
@@ -57,7 +59,7 @@ export const WalletContextProvider = ({ children }) => {
         connectWallet,
         disconnectWallet,
         walletAddress,
-        signer,
+        signer
       }}
     >
       {children}
